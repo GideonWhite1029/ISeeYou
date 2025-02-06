@@ -1,6 +1,6 @@
 package cn.xor7.iseeyou.anticheat
 
-import org.leavesmc.leaves.entity.Photographer
+import dev.gideonwhite1029.horizon.replay.Photographer
 
 data class SuspiciousPhotographer(
     val photographer: Photographer,

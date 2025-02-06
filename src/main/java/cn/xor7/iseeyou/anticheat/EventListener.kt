@@ -4,6 +4,7 @@ import cn.xor7.iseeyou.utils.InstantReplayManager
 import cn.xor7.iseeyou.highSpeedPausedPhotographers
 import cn.xor7.iseeyou.photographers
 import cn.xor7.iseeyou.toml
+import dev.gideonwhite1029.horizon.replay.Photographer
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -11,7 +12,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import org.leavesmc.leaves.entity.Photographer
 import java.io.File
 import java.io.IOException
 import java.time.LocalDateTime
@@ -20,14 +20,14 @@ import java.util.*
 import kotlin.math.pow
 
 /**
- * 事件监听器对象，用于监听玩家加入、移动和退出事件
+ * Event listener object, used to listen for player join, move and exit events
  */
 object EventListener : Listener {
     val DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd@HH-mm-ss")
     var pauseRecordingOnHighSpeedThresholdPerTickSquared = 0.00
 
     /**
-     * 监听玩家加入事件
+     * Listen for player joining events
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     @Throws(IOException::class)
@@ -82,7 +82,7 @@ object EventListener : Listener {
     }
 
     /**
-     * 监听玩家移动事件
+     * Listen for player movement events
      */
     @EventHandler
     fun onPlayerMove(event: PlayerMoveEvent) {
@@ -101,7 +101,7 @@ object EventListener : Listener {
     }
 
     /**
-     * 监听玩家退出事件
+     * Listen for player exit events
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     fun onPlayerQuit(event: PlayerQuitEvent) {

@@ -7,21 +7,20 @@ import cn.xor7.iseeyou.anticheat.suspiciousPhotographers
 import cn.xor7.iseeyou.utils.ConfigData
 import cn.xor7.iseeyou.utils.InstantReplayManager
 import cn.xor7.iseeyou.utils.TomlEx
-import cn.xor7.iseeyou.utils.metrics.Metrics
-import cn.xor7.iseeyou.utils.updatechecker.CompareVersions
-import cn.xor7.iseeyou.utils.updatechecker.UpdateChecker
+import dev.gideonwhite1029.horizon.replay.Photographer
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.kotlindsl.*
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.command.CommandExecutor
 import org.bukkit.configuration.InvalidConfigurationException
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
-import org.leavesmc.leaves.entity.Photographer
 import java.io.File
 import java.io.IOException
 import java.nio.file.*
@@ -59,15 +58,13 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
         registerCommand()
         setupConfig()
 
-        logInfo("██╗███████╗███████╗███████╗██╗   ██╗ ██████╗ ██╗   ██╗")
-        logInfo("██║██╔════╝██╔════╝██╔════╝╚██╗ ██╔╝██╔═══██╗██║   ██║")
-        logInfo("██║███████╗█████╗  █████╗   ╚████╔╝ ██║   ██║██║   ██║")
-        logInfo("██║╚════██║██╔══╝  ██╔══╝    ╚██╔╝  ██║   ██║██║   ██║")
-        logInfo("██║███████║███████╗███████╗   ██║   ╚██████╔╝╚██████╔╝")
-        logInfo("╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝    ╚═════╝  ╚═════╝")
+        logInfo(" ___ ____          __   __          ")
+        logInfo("|_ _/ ___|  ___  __\\ \\ / /__  _   _ ")
+        logInfo(" | |\\___ \\ / _ \\/ _ \\ V / _ \\| | | |")
+        logInfo(" | | ___) |  __/  __/| | (_) | |_| |")
+        logInfo("|___|____/ \\___|\\___||_|\\___/ \\__,_|")
 
         if (toml != null) {
-            // 清理临时文件
             if (toml!!.data.deleteTmpFileOnLoad) {
                 try {
                     Files.walk(Paths.get(toml!!.data.recordPath), Int.MAX_VALUE, FileVisitOption.FOLLOW_LINKS).use { paths ->
@@ -75,19 +72,17 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                             .forEach { deleteTmpFolder(it) }
                     }
                 } catch (_: IOException) {
-                    // 忽略异常
                 }
             }
 
             EventListener.pauseRecordingOnHighSpeedThresholdPerTickSquared = (toml!!.data.pauseRecordingOnHighSpeed.threshold / 20).pow(2.0)
 
-            // 清理过期记录文件
             if (toml!!.data.clearOutdatedRecordFile.enabled) {
                 cleanOutdatedRecordings()
                 var interval = toml!!.data.clearOutdatedRecordFile.interval
                 if (interval !in 1..24) {
                     interval = 24
-                    logWarning("加载清理间隔参数失败，已重置为默认值24。")
+                    logWarning("Loading the cleanup interval parameter failed and has been reset to the default value of 24.")
                 }
                 object : BukkitRunnable() {
                     override fun run() = cleanOutdatedRecordings()
@@ -96,89 +91,55 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
 
             Bukkit.getPluginManager().registerEvents(EventListener, this)
         } else {
-            logError("配置初始化失败，插件无法启用。")
+            logError("Configuration initialization failed and the plugin cannot be enabled.")
             Bukkit.getPluginManager().disablePlugin(this)
         }
 
-        // bStats 集成
-        if (toml!!.data.bStats) {
-            val pluginId = 21845
-            val metrics: Metrics = Metrics(this, pluginId)
-            metrics.addCustomChart(Metrics.SimplePie("chart_id") { "My value" })
-        }
-
-        // 注册反作弊监听器
         Bukkit.getPluginManager().registerEvents(AntiCheatListener, this)
 
-        // 注册第三方插件监听器
         registerThirdPartyListeners()
-
-        // 更新检查
-        if (toml!!.data.check_for_updates) {
-            checkForUpdates()
-        }
     }
 
     private fun registerThirdPartyListeners() {
         if (Bukkit.getPluginManager().isPluginEnabled("Themis") && toml!!.data.recordSuspiciousPlayer.enableThemisIntegration) {
             Bukkit.getPluginManager().registerEvents(ThemisListener(), this)
-            logInfo("注册 Themis 监听器...")
+            logInfo("Register the Themis listener...")
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Matrix") && toml!!.data.recordSuspiciousPlayer.enableMatrixIntegration) {
             Bukkit.getPluginManager().registerEvents(MatrixListener(), this)
-            logInfo("注册 Matrix 监听器...")
+            logInfo("Register a Matrix listener...")
         }
 
         if (Bukkit.getPluginManager()
                 .isPluginEnabled("Vulcan") && toml!!.data.recordSuspiciousPlayer.enableVulcanIntegration
         ) {
             Bukkit.getPluginManager().registerEvents(VulcanListener(), this)
-            logInfo("注册 Vulcan 监听器...")
+            logInfo("Register the Vulcan listener...")
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Negativity") && toml!!.data.recordSuspiciousPlayer.enableNegativityIntegration) {
             Bukkit.getPluginManager().registerEvents(NegativityListener(), this)
-            logInfo("注册 Negativity 监听器...")
+            logInfo("Register the Negativity listener...")
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("GrimAC") && toml!!.data.recordSuspiciousPlayer.enableGrimACIntegration) {
             Bukkit.getPluginManager().registerEvents(GrimACListener(), this)
-            logInfo("注册 GrimAC 监听器...")
+            logInfo("Register a GrimAC listener...")
         }
 
         if (Bukkit.getPluginManager()
                 .isPluginEnabled("LightAntiCheat") && toml!!.data.recordSuspiciousPlayer.enableLightAntiCheatIntegration
         ) {
             Bukkit.getPluginManager().registerEvents(LightAntiCheatListener(), this)
-            logInfo("注册 LightAntiCheat 监听器...")
+            logInfo("Register the LightAntiCheat listener...")
         }
 
         if (Bukkit.getPluginManager()
                 .isPluginEnabled("Spartan") && toml!!.data.recordSuspiciousPlayer.enableSpartanIntegration
         ) {
             Bukkit.getPluginManager().registerEvents(SpartanListener(), this)
-            logInfo("注册 Spartan 监听器...")
-        }
-    }
-
-    private fun checkForUpdates() {
-        val updateChecker = UpdateChecker(this, "ISeeYou")
-        updateChecker.getVersion { latestVersion: String ->
-            val currentVersion = description.version
-            val comparisonResult = CompareVersions.compareVersions(currentVersion, latestVersion)
-            val logMessage = when {
-                comparisonResult < 0 -> {
-                    "有新版本可用: $latestVersion\n" +
-                            "MineBBS：https://www.minebbs.com/resources/iseeyou.7276/updates\n" +
-                            "Hangar：https://hangar.papermc.io/CerealAxis/ISeeYou/versions\n" +
-                            "Github：https://github.com/MC-XiaoHei/ISeeYou/releases/"
-                }
-
-                comparisonResult == 0 -> "您的插件已经是最新版本！"
-                else -> "您可能在使用测试版插件，最新正式版版本为 $latestVersion ！"
-            }
-            logInfo(logMessage)
+            logInfo("Register the Spartan listener...")
         }
     }
 
@@ -190,22 +151,22 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                         val location = player.location
                         val name = args["name"] as String
                         if (name.length !in 4..16) {
-                            player.sendMessage("摄像机名称长度必须在4-16之间！")
+                            player.sendMessage("Camera name length must be between 4-16！")
                             return@playerExecutor
                         }
                         createPhotographer(name, location)
-                        player.sendMessage("成功创建摄像机：$name")
+                        player.sendMessage("Camera created successfully：$name")
                     }
                     locationArgument("location") {
                         anyExecutor { sender, args ->
                             val location = args["location"] as Location
                             val name = args["name"] as String
                             if (name.length !in 4..16) {
-                                sender.sendMessage("摄像机名称长度必须在4-16之间！")
+                                sender.sendMessage("Camera name length must be between 4-16！")
                                 return@anyExecutor
                             }
                             createPhotographer(name, location)
-                            sender.sendMessage("成功创建摄像机：$name")
+                            sender.sendMessage("Camera created successfully：$name")
                         }
                     }
                 }
@@ -216,27 +177,27 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                     anyExecutor { sender, args ->
                         val name = args["name"] as String
                         val uuid = commandPhotographersNameUUIDMap[name] ?: run {
-                            sender.sendMessage("不存在该摄像机！")
+                            sender.sendMessage("The camera does not exist！")
                             return@anyExecutor
                         }
                         photographers[uuid]?.stopRecording(toml!!.data.asyncSave)
-                        sender.sendMessage("成功移除摄像机：$name")
+                        sender.sendMessage("Camera removed successfully：$name")
                     }
                 }
             }
             literalArgument("list") {
                 anyExecutor { sender, _ ->
                     val photographerNames = commandPhotographersNameUUIDMap.keys.joinToString(", ")
-                    sender.sendMessage("摄像机列表：$photographerNames")
+                    sender.sendMessage("Camera list：$photographerNames")
                 }
             }
         }
         commandTree("instantreplay") {
             playerExecutor { player, _ ->
                 if (InstantReplayManager.replay(player)) {
-                    player.sendMessage("成功创建即时回放")
+                    player.sendMessage("Instant replay created successfully")
                 } else {
-                    player.sendMessage("操作过快，即时回放创建失败！")
+                    player.sendMessage("The operation was too fast and instant playback creation failed.！")
                 }
             }
             playerArgument("player") {
@@ -249,7 +210,7 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
         val photographer = Bukkit
             .getPhotographerManager()
             .createPhotographer(name, location)
-        if (photographer == null) throw RuntimeException("创建摄像机失败: $name")
+        if (photographer == null) throw RuntimeException("Failed to create a camera: $name")
         val uuid = UUID.randomUUID().toString()
 
         photographer.teleport(location)
@@ -293,7 +254,7 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                 }
             })
         } catch (e: IOException) {
-            logSevere("删除临时文件夹时出错: ${e.message}")
+            logSevere("An error occurred while deleting a temporary folder: ${e.message}")
             e.printStackTrace()
         }
     }
@@ -309,7 +270,7 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                     null
                 }
 
-            logInfo("开始删除过期的记录文件在 $recordingsDirA 和 $recordingsDirB")
+            logInfo("Start deleting expired record files in $recordingsDirA and $recordingsDirB")
             var deletedCount = 0
 
             deletedCount += deleteFilesInDirectory(recordingsDirA)
@@ -317,9 +278,9 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                 deletedCount += deleteFilesInDirectory(it)
             }
 
-            logInfo("已删除过期的记录文件，删除了 $deletedCount 个文件")
+            logInfo("Deleted expired record files, deleted $deletedCount files")
         } catch (e: IOException) {
-            logSevere("清理过期记录时出错: ${e.message}")
+            logSevere("An error occurred while cleaning out expiration records: ${e.message}")
             e.printStackTrace()
         }
     }
@@ -353,10 +314,10 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                             val future = executor.submit(Callable {
                                 try {
                                     Files.delete(file)
-                                    logInfo("删除了记录文件: $fileName")
+                                    logInfo("Deleted record file: $fileName")
                                     true
                                 } catch (e: IOException) {
-                                    logSevere("删除记录文件时出错: $fileName, 错误: ${e.message}")
+                                    logSevere("An error occurred while deleting the record file: $fileName, error: ${e.message}")
                                     e.printStackTrace()
                                     false
                                 }
@@ -367,7 +328,7 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                                     deletedCount++
                                 }
                             } catch (e: TimeoutException) {
-                                logWarning("删除文件超时: $fileName. 跳过此文件...")
+                                logWarning("Delete file timeout: $fileName. Skip this file...")
                                 future.cancel(true)
                             } finally {
                                 executor.shutdown()
@@ -376,10 +337,10 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
                     }
             }
             if (fileCount == 0 || deletedCount == 0) {
-                logInfo("未找到需要删除的过期记录文件。")
+                logInfo("The expired record file that needs to be deleted was not found.")
             }
         } catch (e: IOException) {
-            logSevere("处理文件夹时出错: $folderPath, 错误: ${e.message}")
+            logSevere("An error occurred while processing folders: $folderPath, error: ${e.message}")
             e.printStackTrace()
         }
         return deletedCount
@@ -397,18 +358,22 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
     }
 
     private fun logInfo(message: String) {
-        logger.info("${ChatColor.GREEN}[INFO] ${ChatColor.RESET}$message")
+        val component = Component.text("[INFO] $message").color(NamedTextColor.GREEN)
+        logger.info(PlainTextComponentSerializer.plainText().serialize(component))
     }
 
     private fun logWarning(message: String) {
-        logger.warning("${ChatColor.YELLOW}[WARNING] ${ChatColor.RESET}$message")
+        val component = Component.text("[WARNING] $message").color(NamedTextColor.YELLOW)
+        logger.warning(PlainTextComponentSerializer.plainText().serialize(component))
     }
 
     private fun logSevere(message: String) {
-        logger.severe("${ChatColor.RED}[DANGER] ${ChatColor.RESET}$message")
+        val component = Component.text("[DANGER] $message").color(NamedTextColor.RED)
+        logger.severe(PlainTextComponentSerializer.plainText().serialize(component))
     }
 
     private fun logError(message: String) {
-        logger.severe("${ChatColor.RED}[ERROR] ${ChatColor.RESET}$message")
+        val component = Component.text("[ERROR] $message").color(NamedTextColor.RED)
+        logger.severe(PlainTextComponentSerializer.plainText().serialize(component))
     }
 }

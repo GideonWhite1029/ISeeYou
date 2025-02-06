@@ -23,7 +23,7 @@ public class TomlEx<T> extends Toml {
             try {
                 file.getParentFile().mkdirs();
                 if (!file.createNewFile()) {
-                    throw new IOException("Can not create file: " + filePath);
+                    throw new IOException("Cannot create file: " + filePath);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

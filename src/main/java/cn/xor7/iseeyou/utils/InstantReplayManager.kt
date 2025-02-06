@@ -3,13 +3,13 @@ package cn.xor7.iseeyou.utils
 import cn.xor7.iseeyou.anticheat.EventListener.DATE_FORMATTER
 import cn.xor7.iseeyou.instance
 import cn.xor7.iseeyou.toml
+import dev.gideonwhite1029.horizon.replay.Photographer
 import net.jodah.expiringmap.ExpirationPolicy
 import net.jodah.expiringmap.ExpiringMap
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.scheduler.BukkitTask
-import org.leavesmc.leaves.entity.Photographer
 import java.io.File
 import java.time.LocalDateTime
 import java.util.*

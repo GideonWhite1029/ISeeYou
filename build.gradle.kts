@@ -17,8 +17,7 @@ repositories {
     mavenCentral()
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://maven.aliyun.com/repository/public")
-    maven("https://repo.leavesmc.org/releases")
-    maven("https://repo.leavesmc.org/snapshots")
+    maven("https://repo.timelesswaffle.su/snapshots")
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.codemc.org/repository/maven-public/")
     flatDir {
@@ -37,7 +36,7 @@ dependencies {
     compileOnly("com.github.Elikill58:Negativity:2.7.1")
     //other dependencies
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
-    compileOnly("org.leavesmc.leaves:leaves-api:1.21.3-R0.1-SNAPSHOT")
+    compileOnly("dev.gideonwhite1029.horizon:horizon-api:1.21.4-R0.1-SNAPSHOT")
     implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:${commandAPIVer}")
     implementation("dev.jorel:commandapi-bukkit-kotlin:${commandAPIVer}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
