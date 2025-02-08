@@ -1,4 +1,4 @@
-package cn.xor7.iseeyou.anticheat
+package dev.gideonwhite1029.iseeyou.anticheat
 
 import dev.gideonwhite1029.horizon.replay.Photographer
 

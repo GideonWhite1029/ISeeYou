@@ -2,24 +2,16 @@
 
 <img src="https://picdm.sunbangyan.cn/2024/02/20/b7ea08f832b52a6dcbc215947d849425.jpeg" alt="Logo" width="100" height="100">
 
-_Also known as ICU_
-
-[![GitHub release](https://img.shields.io/github/v/release/MC-XiaoHei/ISeeYou?style=flat-square)](https://github.com/MC-XiaoHei/ISeeYou/releases)
-[![GitHub Actions CI](https://img.shields.io/github/actions/workflow/status/MC-XiaoHei/ISeeYou/release.yml?style=flat-square)](https://github.com/MC-XiaoHei/ISeeYou/actions)
-[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/MC-XiaoHei/ISeeYou/blob/master/LICENSE)
-![GitHub all releases](https://img.shields.io/github/downloads/MC-XiaoHei/ISeeYou/total?style=flat-square)
-
-[中文](README_CN.MD) | [English](README.MD)
-
 > [!WARNING]
-> This plugin can only run on servers using the [Leaves](https://leavesmc.org/)
-> or [Leaf](https://github.com/Winds-Studio/Leaf) cores. It is not compatible with other server cores!
+> This plugin can only run on servers using the [Horizon](https://github.com/GideonWhite1029/Horizon) core. It is not compatible with other server cores!
 >
-> The developers only guarantee that the **latest stable version** of the ISeeYou plugin will work properly on the *
-*latest version** of the Leaves or Leaf core server. Compatibility with older versions is not maintained.
+> The developers only guarantee that the **latest stable version** of the ISeeYou plugin will work properly on the **latest version** of the Horizon core server. Compatibility with older versions is not maintained.
 
-ISeeYou utilizes the Replay API provided by the [Leaves](https://leavesmc.org/)
-and [Leaf](https://github.com/Winds-Studio/Leaf) cores to record player actions in `.mcpr` format.
+ISeeYou utilizes the Replay API provided by the [Horizon](https://github.com/GideonWhite1029/Horizon) core to record player actions in `.mcpr` format.
+
+## Thank you
+
+**This plugin is an outcome of the original [ISeeYou](https://github.com/MC-XiaoHei/ISeeYou). If you are looking for a plugin to use [Leaves](https://leavesmc.org/) or [Leaf](https://github.com/Winds-Studio/Leaf) cores, go to the original project**
 
 ## Features
 
@@ -40,43 +32,26 @@ and [Leaf](https://github.com/Winds-Studio/Leaf) cores to record player actions 
 | [AC - Negativity](https://www.spigotmc.org/resources/ac-negativity-spigot-1-8-1-20-bungeecord-velocity.48399/)                                | ⚠️ Beta      |
 | [Grim Anticheat](https://www.spigotmc.org/resources/grim-anticheat.99923/)                                                                    | ⚠️ Beta      |
 | [LightAntiCheat](https://github.com/tiredvekster/LightAntiCheat)                                                                              | ⚠️ Beta      |
+| [SpartanAntiCheat](https://www.spigotmc.org/resources/spartan-anti-cheat-for-java-advanced-anticheat-detection-1-7-1-21-4.25638/)             | ⚠️ Beta      |
 
 > [!TIP]
 > If you would like us to add support for more anti-cheat plugins, please create
-> an [issue](https://github.com/MC-XiaoHei/ISeeYou/issues) and let us know!
-
-## Recommended Versions
-
-### [Leaves](leavesmc.org)
-
-| Leaves Version | Compatible Versions                                                                                                                       |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **1.20.4**     | [v1.0.0](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.1.0) - [v1.2.1](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.2.1) |
-| **1.20.6**     | [v1.2.2](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.2.2) - [v1.3.0](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.0) |
-| **1.21**       | [v1.3.0](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.0) - [v1.3.1](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.1) |
-| **1.21.1**     | [v1.3.2](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.2)                                                                       |
-| **1.21.3**     | [v1.3.3](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.3) - [v1.3.4](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.4) |
-
-### [Leaf](https://github.com/Winds-Studio/Leaf)
-
-| Leaf Version | Compatible Versions                                                                                                                       |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **1.21.1**   | [v1.3.2](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.2)                                                                       |
-| **1.21.3**   | [v1.3.3](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.3) - [v1.3.4](https://github.com/MC-XiaoHei/ISeeYou/releases/tag/v1.3.4) |
+> an [issue](https://github.com/GideonWhite1029/Horizon/issues) and let us know!
 
 ## Usage
 
 ### Dependencies
 
-| **Dependency**                                                                                                                                | **Optional** |
-|:----------------------------------------------------------------------------------------------------------------------------------------------|:------------:|
-| Server [**Leaves**](https://leavesmc.org/) or [**Leaf**](https://github.com/Winds-Studio/Leaf)                                                | **Required** |
-| [Themis Anti Cheat](https://www.spigotmc.org/resources/themis-anti-cheat-1-17-1-20-bedrock-support-paper-compatibility-free-optimized.90766/) | 💡 Optional  |
-| [Matrix AntiCheat](https://matrix.rip/)                                                                                                       | 💡 Optional  |
-| [Vulcan Anti-Cheat](https://www.spigotmc.org/resources/vulcan-anti-cheat-advanced-cheat-detection-1-7-1-20-4.83626/)                          | 💡 Optional  |
-| [AC - Negativity](https://www.spigotmc.org/resources/ac-negativity-spigot-1-8-1-20-bungeecord-velocity.48399/)                                | 💡 Optional  |
-| [Grim Anticheat](https://www.spigotmc.org/resources/grim-anticheat.99923/)                                                                    | 💡 Optional  |
-| [LightAntiCheat](https://github.com/tiredvekster/LightAntiCheat)                                                                              | 💡 Optional  |
+| **Dependency**                                                                                                                                     |   **Optional**   |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------|:----------------:|
+| Server [**Horizon**](https://github.com/GideonWhite1029/Horizon)                                                                                   |   **Required**   |
+| [Themis Anti Cheat](https://www.spigotmc.org/resources/themis-anti-cheat-1-17-1-20-bedrock-support-paper-compatibility-free-optimized.90766/)      |   💡 Optional    |
+| [Matrix AntiCheat](https://matrix.rip/)                                                                                                            |   💡 Optional    |
+| [Vulcan Anti-Cheat](https://www.spigotmc.org/resources/vulcan-anti-cheat-advanced-cheat-detection-1-7-1-20-4.83626/)                               |   💡 Optional    |
+| [AC - Negativity](https://www.spigotmc.org/resources/ac-negativity-spigot-1-8-1-20-bungeecord-velocity.48399/)                                     |   💡 Optional    |
+| [Grim Anticheat](https://www.spigotmc.org/resources/grim-anticheat.99923/)                                                                         |   💡 Optional    |
+| [LightAntiCheat](https://github.com/tiredvekster/LightAntiCheat)                                                                                   |   💡 Optional    |
+| [SpartanAntiCheat](https://www.spigotmc.org/resources/spartan-anti-cheat-for-java-advanced-anticheat-detection-1-7-1-21-4.25638/)                  |   💡 Optional    |
 
 > [!IMPORTANT]
 > Before installing an anti-cheat plugin, please ensure that its required dependencies are also installed to avoid
@@ -99,7 +74,6 @@ pauseInsteadOfStopRecordingOnPlayerQuit = false # Pause recording on player quit
 # Recording save path template. Use ${name} and ${uuid} variables to replace with player name and UUID.
 recordPath = "replay/player/${name}@${uuid}"
 asyncSave = false # Whether to enable asynchronous saving
-bStats = true # Whether to enable bStats statistics
 
 # [pauseRecordingOnHighSpeed] Pause recording when the player is moving at high speeds
 [pauseRecordingOnHighSpeed]
@@ -127,6 +101,7 @@ enableVulcanIntegration = false  # Enable recording of suspicious players report
 enableNegativityIntegration = false  # Enable recording of suspicious players reported by Negativity
 enableGrimACIntegration = false  # Enable recording of suspicious players reported by GrimAC
 enableLightAntiCheatIntegration = false  # Enable recording of suspicious players reported by LightAntiCheat
+enableSpartanIntegration = false # Enable recording of suspicious players reported by SpartanAntiCheat
 recordMinutes = 5  # Duration to record suspicious players (in minutes)
 recordPath = "replay/suspicious/${name}@${uuid}"  # Path template for suspicious player recordings
 
@@ -161,18 +136,17 @@ recordPath = "replay/instant/${name}@${uuid}"  # Path template for instant repla
 ## Download
 
 - **Stable Versions**
-  - [GitHub Releases](https://github.com/MC-XiaoHei/ISeeYou/releases)
-  - [MineBBS](https://www.minebbs.com/resources/iseeyou.7276/)
-  - [Hangar](https://hangar.papermc.io/CerealAxis/ISeeYou)
+  - [GitHub Releases](https://github.com/GideonWhite1029/ISeeYou/releases)
+ 
 - **Development Versions**
-  - [GitHub Actions CI](https://github.com/MC-XiaoHei/ISeeYou/actions/workflows/dev-build.yml?query=is%3Asuccess)
+  - [GitHub Actions CI](https://github.com/GideonWhite1029/ISeeYou/actions/workflows/dev-build.yml?query=is%3Asuccess)
 
 ### Building From Scratch
 
 #### 1. Clone the project repository
 
 ```shell
-git clone https://github.com/MC-XiaoHei/ISeeYou.git
+git clone https://github.com/GideonWhite1029/ISeeYou.git
 ```
 
 #### 2. Compile and Build
@@ -183,27 +157,10 @@ git clone https://github.com/MC-XiaoHei/ISeeYou.git
 
 After the build is complete, you will find the `ISeeYou.jar` file in the `build/libs` directory.
 
-## Author Information
-
-- Lead Developer: [MC-XiaoHei](https://github.com/MC-XiaoHei), Founder of ISeeYou
-- Lead Developer: [CerealAxis](https://github.com/CerealAxis), Responsible for ongoing maintenance and updates
-- Contributor: [Cranyozen](https://github.com/Cranyozen), Created the automated build CI
-- Contributor: [Bluemangoo](https://github.com/Bluemangoo), Fixed multiple spelling errors in the README
-
 ## Notes
 
-- This plugin can only run on servers using the [Leaves](https://leavesmc.top/)
-  or [Leaf](https://github.com/Winds-Studio/Leaf) cores (and their derivatives). It is not supported on other Spigot or
+- This plugin can only run on servers using the [Horizon](https://github.com/GideonWhite1029/Horizon) core. It is not supported on other Spigot or
   its derivatives (such as Paper, Purpur, etc.).
 - Please carefully read and configure the `config.toml` file before using the plugin to ensure it operates correctly.
 - Although there have been no reports of bugs caused by reloads, it is recommended not to use plugins like `Plugman` to
   hot-reload this plugin, as this may cause unknown issues!
-
-## Contact Us
-
-Thank you for using the ISeeYou plugin! If you encounter any issues or have suggestions during use, feel free to submit
-an [issue](https://github.com/MC-XiaoHei/ISeeYou/issues) on the GitHub repository.
-
-## Statistics
-
-[![](https://bstats.org/signatures/bukkit/ISeeYou.svg)](https://bstats.org/plugin/bukkit/ISeeYou/21845)

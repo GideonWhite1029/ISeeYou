@@ -1,4 +1,4 @@
-package cn.xor7.iseeyou.utils
+package dev.gideonwhite1029.iseeyou.utils
 
 import org.bukkit.entity.Player
 

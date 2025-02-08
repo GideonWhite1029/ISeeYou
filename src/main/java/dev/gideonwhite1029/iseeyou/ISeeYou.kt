@@ -1,20 +1,23 @@
-package cn.xor7.iseeyou
+package dev.gideonwhite1029.iseeyou
 
-import cn.xor7.iseeyou.anticheat.AntiCheatListener
-import cn.xor7.iseeyou.anticheat.EventListener
-import cn.xor7.iseeyou.anticheat.listeners.*
-import cn.xor7.iseeyou.anticheat.suspiciousPhotographers
-import cn.xor7.iseeyou.utils.ConfigData
-import cn.xor7.iseeyou.utils.InstantReplayManager
-import cn.xor7.iseeyou.utils.TomlEx
+import dev.gideonwhite1029.iseeyou.anticheat.AntiCheatListener
+import dev.gideonwhite1029.iseeyou.anticheat.EventListener
+import dev.gideonwhite1029.iseeyou.anticheat.suspiciousPhotographers
+import dev.gideonwhite1029.iseeyou.utils.ConfigData
+import dev.gideonwhite1029.iseeyou.utils.InstantReplayManager
+import dev.gideonwhite1029.iseeyou.utils.TomlEx
 import dev.gideonwhite1029.horizon.replay.Photographer
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.GrimACListener
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.LightAntiCheatListener
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.MatrixListener
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.NegativityListener
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.SpartanListener
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.ThemisListener
+import dev.gideonwhite1029.iseeyou.anticheat.listeners.VulcanListener
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.kotlindsl.*
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.command.CommandExecutor
@@ -358,22 +361,18 @@ class ISeeYou : JavaPlugin(), CommandExecutor {
     }
 
     private fun logInfo(message: String) {
-        val component = Component.text("[INFO] $message").color(NamedTextColor.GREEN)
-        logger.info(PlainTextComponentSerializer.plainText().serialize(component))
+        logger.info("\u001B[32m[INFO] $message\u001B[0m")
     }
 
     private fun logWarning(message: String) {
-        val component = Component.text("[WARNING] $message").color(NamedTextColor.YELLOW)
-        logger.warning(PlainTextComponentSerializer.plainText().serialize(component))
+        logger.warning("\u001B[33m[WARNING] $message\u001B[0m")
     }
 
     private fun logSevere(message: String) {
-        val component = Component.text("[DANGER] $message").color(NamedTextColor.RED)
-        logger.severe(PlainTextComponentSerializer.plainText().serialize(component))
+        logger.severe("\u001B[31m[DANGER] $message\u001B[0m")
     }
 
     private fun logError(message: String) {
-        val component = Component.text("[ERROR] $message").color(NamedTextColor.RED)
-        logger.severe(PlainTextComponentSerializer.plainText().serialize(component))
+        logger.severe("\u001B[31m[ERROR] $message\u001B[0m")
     }
 }

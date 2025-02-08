@@ -6,8 +6,8 @@ plugins {
     kotlin("jvm") version "1.9.20"
 }
 
-group = "cn.xor7"
-version = "1.3.5"
+group = "dev.gideonwhite1029"
+version = "1.0.0"
 
 val commandAPIVer = "9.7.0"
 
@@ -32,7 +32,7 @@ dependencies {
     compileOnly(files("libs/VulcanAPI.jar"))
     compileOnly(files("libs/LightAntiCheat.jar"))
     compileOnly(files("libs/SpartanAPI.jar"))
-    implementation("com.github.MWHunter:GrimAPI:9f5aaef74b")
+    implementation("com.github.GrimAnticheat:GrimAPI:4acdbe373e")
     compileOnly("com.github.Elikill58:Negativity:2.7.1")
     //other dependencies
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
@@ -68,7 +68,7 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 tasks.withType<ShadowJar> {
-    relocate("dev.jorel.commandapi", "cn.xor7.iseeyou.commandapi")
+    relocate("dev.jorel.commandapi", "dev.gideonwhite1029.iseeyou.commandapi")
     minimize()
     exclude("META-INF/*.SF")
     exclude("META-INF/*.DSA")

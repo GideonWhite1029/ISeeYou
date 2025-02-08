@@ -1,9 +1,9 @@
-package cn.xor7.iseeyou.anticheat
+package dev.gideonwhite1029.iseeyou.anticheat
 
-import cn.xor7.iseeyou.utils.InstantReplayManager
-import cn.xor7.iseeyou.highSpeedPausedPhotographers
-import cn.xor7.iseeyou.photographers
-import cn.xor7.iseeyou.toml
+import dev.gideonwhite1029.iseeyou.utils.InstantReplayManager
+import dev.gideonwhite1029.iseeyou.highSpeedPausedPhotographers
+import dev.gideonwhite1029.iseeyou.photographers
+import dev.gideonwhite1029.iseeyou.toml
 import dev.gideonwhite1029.horizon.replay.Photographer
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler

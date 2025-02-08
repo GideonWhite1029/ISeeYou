@@ -1,8 +1,8 @@
-package cn.xor7.iseeyou.utils
+package dev.gideonwhite1029.iseeyou.utils
 
-import cn.xor7.iseeyou.anticheat.EventListener.DATE_FORMATTER
-import cn.xor7.iseeyou.instance
-import cn.xor7.iseeyou.toml
+import dev.gideonwhite1029.iseeyou.anticheat.EventListener.DATE_FORMATTER
+import dev.gideonwhite1029.iseeyou.instance
+import dev.gideonwhite1029.iseeyou.toml
 import dev.gideonwhite1029.horizon.replay.Photographer
 import net.jodah.expiringmap.ExpirationPolicy
 import net.jodah.expiringmap.ExpiringMap
@@ -14,6 +14,7 @@ import java.io.File
 import java.time.LocalDateTime
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.get
 
 object InstantReplayManager {
     val photographerMap: ExpiringMap<String, Photographer> = ExpiringMap.builder()

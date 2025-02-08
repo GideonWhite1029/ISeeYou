@@ -1,4 +1,4 @@
-package cn.xor7.iseeyou.utils;
+package dev.gideonwhite1029.iseeyou.utils;
 
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;

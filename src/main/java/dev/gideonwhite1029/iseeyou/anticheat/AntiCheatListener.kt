@@ -1,7 +1,7 @@
-package cn.xor7.iseeyou.anticheat
+package dev.gideonwhite1029.iseeyou.anticheat
 
-import cn.xor7.iseeyou.instance
-import cn.xor7.iseeyou.toml
+import dev.gideonwhite1029.iseeyou.instance
+import dev.gideonwhite1029.iseeyou.toml
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
