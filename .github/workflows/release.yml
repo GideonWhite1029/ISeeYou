@@ -2,8 +2,7 @@ name: "Release"
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: [ master ]
 
 jobs:
   build:
@@ -16,7 +15,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'zulu'
+          distribution: 'temurin'
         
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.4.2
